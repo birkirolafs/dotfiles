@@ -1,6 +1,8 @@
 *.swp
 npm-debug.log
 
+*.netrwhist
+
 plug.vim.old
 
 config/nvim/spell
