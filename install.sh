@@ -28,7 +28,6 @@ if [ "$(uname)" == "Darwin" ]; then
 	source install/brew.sh
 fi
 
-
 unset pwd
 
 echo "done"
