@@ -1,4 +1,4 @@
- Section Plugins {{{
+"Section Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
 " colorschemes
