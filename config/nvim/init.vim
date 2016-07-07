@@ -1,16 +1,37 @@
-" Section Plugins {{{
+ Section Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
 " colorschemes
 Plug 'chriskempson/base16-vim'
 
-
+" alignment
+Plug 'junegunn/vim-easy-align'
 
 " utilities
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer"
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
+
+Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functuality
+Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
+
+Plug 'editorconfig/editorconfig-vim' " .editorconfig support
+
+" language-specific plugins
+
+" HTML
+Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
+Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
+" JAVASCRIPT
+Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
+Plug 'moll/vim-node', { 'for': 'javascript' } " node support
+Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
+Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
+
+
 
 call plug#end()
 
@@ -174,6 +195,13 @@ set smartindent
 " }}}
 
 " Section Mappings {{{
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " remap esc
 inoremap jk <esc>
