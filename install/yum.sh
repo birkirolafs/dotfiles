@@ -8,3 +8,4 @@ curl -s -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfrac
 yum -y -q install neovim
 
 yum -y -q install git tree htop ack
+yum -y -q install docker
