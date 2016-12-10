@@ -33,13 +33,17 @@ export NVM_DIR="/home/birkir/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
-if [ "$BACKGROUND" = "light" ]; then
-    export THEME="base16-google-light"
+if [ "$BACKGROUND" = "dark" ]; then
+    export THEME="base16-atelier-cave"
     BACKGROUND=""
 else
-    export THEME="base16-atelier-cave"
+    export THEME="base16-google-light"
 fi
 
 # Base16 Shell
 BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# Git prompt in bash shell
+export GIT_PS1_SHOWDIRTYSTATE=1
+export PS1='\w$(__git_ps1 " (%s)")\$ '
