@@ -10,6 +10,7 @@ else
 	echo  "Reloading .bashrc"
 	source ~/.bashrc
 	echo  "Installing latest stable release of NodeJS"
+    nvm install v4.4.0
 	nvm install stable
 	nvm alias default stable
 fi

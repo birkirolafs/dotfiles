@@ -1,6 +1,6 @@
 source-file ~/.tmux.conf
 new-session -s dev -n ide
-split-window -v -p 10 -t dev
+split-window -v -p 15 -t dev
 select-pane -t 1
 split-window -h -p 30 -t dev
 new-window -n shell

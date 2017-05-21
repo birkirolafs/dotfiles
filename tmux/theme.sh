@@ -1,11 +1,10 @@
 #### COLOUR
 
-tm_icon="[]"
-tm_color_active=colour51
+#tm_icon="[]" # not showing
+tm_color_active=colour120
 tm_color_inactive=colour241
-tm_color_feature=colour198
-tm_color_music=colour41
-tm_active_border_color=colour51
+tm_color_feature=colour13
+tm_active_border_color=colour198
 
 # separators
 tm_separator_left_bold="◀"
@@ -54,5 +53,4 @@ tm_host="#[fg=$tm_color_feature,bold]#h"
 tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
 
 set -g status-left $tm_session_name' '
-set -g status-right $tm_host' '
-#set -g status-right $tm_tunes' '$tm_date' '$tm_host
+set -g status-right $tm_date' '$tm_host

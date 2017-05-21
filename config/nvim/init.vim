@@ -1,45 +1,13 @@
-"Section Plugins {{{
-call plug#begin('~/.config/nvim/plugged')
-
-" colorschemes
-Plug 'chriskempson/base16-vim'
-
-" alignment
-Plug 'junegunn/vim-easy-align'
-
-" utilities
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer"
-Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'vim-airline/vim-airline' " fancy statusline
-Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
-
-Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functuality
-Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
-
-Plug 'editorconfig/editorconfig-vim' " .editorconfig support
-
-" language-specific plugins
-
-" HTML
-Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
-Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
-" JAVASCRIPT
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
-Plug 'moll/vim-node', { 'for': 'javascript' } " node support
-Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
-Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
-
-
-
-call plug#end()
-
-" }}}
-
+source ~/.config/nvim/plugins.vim
 
 " Section General {{{
-" source ~/.vim/plugins.vim
+
+" Abbreviations
+abbr funciton function
+abbr teh the
+abbr tempalte template
+abbr fitler filter
+abbr restard restart
 
 
 set nocompatible " not compatible with vi
@@ -51,11 +19,26 @@ set backspace=indent,eol,start
 
 
 " set map leader for more key combos
-" let mapleader = ','
-" let g:mapleader = ','
+let mapleader = ','
+let g:mapleader = ','
 "
 set history=1000 " change history to 1000
 set textwidth=120
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+if &term =~ '256color'
+	" disable background color erase
+	set t_ut=
+endif
+
+" enable 24 bit color support if supported
+if (has('nvim'))
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	set termguicolors
+elseif (has("termguicolors"))
+    set termguicolors
+endif
 
 " Tab control
 set noexpandtab " insert tabs rather than spaces for <Tab>
@@ -66,10 +49,16 @@ set shiftwidth=4 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 
+if (has('nvim'))
+	" show results of substition as they're happening
+	" but don't open a split
+	set inccommand=nosplit
+endif
+
 
 if has ('mouse')
-	set mouse=a
-	" set ttymouse=xterm2
+    set mouse=a
+    " set ttymouse=xterm2
 endif
 
 " set clipboard in vim as the same clipboard as normal
@@ -93,13 +82,14 @@ set laststatus=2 " show the status line all the time
 " Section AutoGroups {{{
 " file specific settings
 augroup configgroup
-	autocmd!
-	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-	autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
-	autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
-	autocmd FileType *.md.js :call SyntasticReset<cr>
+    autocmd!
+	autocmd FileType plugin indent on
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType make setlocal ts=9 sts=8 sw=8 noexpandtab
+    autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
+    autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
+    autocmd FileType *.md.js :call SyntasticReset<cr>
     autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
     autocmd FileType .xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
     autocmd FileType crontab setlocal nobackup nowritebackup
@@ -118,16 +108,16 @@ augroup configgroup
     autocmd BufNewFile,BufRead .jshintrc set filetype=json
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
+	autocmd BufNewFile,BufRead *.tmux.conf set filetype=tmux
 
-	autocmd FileType qf wincmd J
+    autocmd FileType qf wincmd J
 
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
 
     autocmd! BufEnter * call ApplyLocalSettings(expand('<afile>:p:h'))
     autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
-    
-        autocmd! BufWritePost * Neomake
+    autocmd! BufWritePost * Neomake
 augroup END
 " }}}
 
@@ -172,14 +162,21 @@ set tm=500
 
 " switch syntax highlighting on
 syntax on
+" set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
+colorscheme onedark         " Set the colorscheme
 
-set encoding=utf8
-let base16colorspace=256  " Access colors present in 256 colorspace"
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-execute "set background=".$BACKGROUND
-execute "colorscheme ".$THEME
-highlight Comment cterm=italic
-highlight htmlArg cterm=italic
+" make the highlighting of tabs and other non-text less annoying
+highlight SpecialKey ctermbg=none ctermfg=8
+highlight NonText ctermbg=none ctermfg=8
+
+let g:onedark_termcolors=16
+
+" make comments and HTML attributes italic
+if $TERM =~ "xterm-255color-italic"
+    let g:onedark_terminal_italics=1
+    highlight Comment cterm=italic
+    highlight htmlArg cterm=italic
+endif
 
 set number " show line numbers
 " set relativenumber " show relative line numbers
@@ -229,14 +226,19 @@ map <leader>v :set paste!<cr>
 
 " edit ~/.config/nvim/init.vim
 map <leader>ev :e! ~/.config/nvim/init.vim<cr>
+" edit ~/.config/nvim/init.vim
+map <leader>ep :e! ~/.config/nvim/plugins.vim<cr>
 " edit gitconfig
 map <leader>eg :e! ~/.gitconfig<cr>
+" edit tmux.config
+map <leader>et :e! ~/.tmux.conf<cr>
 
 " clear highlighted search
 noremap <space> :set hlsearch! hlsearch?<cr>
 
 " activate spell-checking alternatives
 nmap ;s :set invspell spelllang=en<cr>
+
 
 " toggle invisible characters
 set invlist
@@ -448,6 +450,8 @@ nmap <leader>mq :MarkedQuit<cr>
 
 " toggle Limelight
 nmap <leader>f :Limelight!!<cr>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 let g:neomake_javascript_jshint_maker = {
     \ 'args': ['--verbose'],
@@ -465,6 +469,7 @@ let g:neomake_typescript_tsc_maker = {
 \ }
 
 " autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
 
 " CtrlP ignore patterns
@@ -473,17 +478,34 @@ let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
 "             \ 'file': '\.exe$\|\.so$'
 "             \ }
 " only show files that are not ignored by git
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " search the nearest ancestor that contains .git, .hg, .svn
-let g:ctrlp_working_path_mode = 2
+" let g:ctrlp_working_path_mode = 2
 
 
 " airline options
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='base16'
+let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
+let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
+let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
+let g:airline#extensions#tabline#show_splits = 0
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Airline Symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
@@ -505,5 +527,13 @@ call ApplyLocalSettings(expand('.'))
 
 " }}}
 
+" Use local configuration file
+if !empty(glob("~/.local.vim"))
+    source ~/.local.vim
+endif
 
 " vim:foldmethod=marker:foldlevel=0
+
+" interpreter paths for python
+let g:python_host_prog = '$HOME/.pyenv/versions/2.7/bin/python'
+let g:python3_host_prog = '$HOME/.pyenv/versions/3.4.6/bin/python'

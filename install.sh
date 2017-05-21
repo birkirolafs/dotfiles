@@ -17,6 +17,10 @@ if [ "$(uname)" == "Linux" ]; then
 	# sudo install binaries with yum
 	echo -e $pwd | sudo -S ./install/yum.sh
 
+    source install/centos.sh
+
+    source install/tmux.sh
+
 	source install/nvm.sh
 
 	source install/npm.sh

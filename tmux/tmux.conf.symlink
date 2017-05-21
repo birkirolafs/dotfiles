@@ -1,10 +1,10 @@
 #set -g default-command "login-shell"
 
 # tmux display things in 256 colors
-set -g default-terminal "tmux-256color-italic"
+set -g default-terminal "xterm-256color"
 
 #  enable terminal compability
-set-option -ga terminal-overrides ",tmux-256color-italic:Tc"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 set -g history-limit 20000
 
@@ -55,6 +55,7 @@ set-option -g set-titles-string "#T - #W"
 # reload config file
 bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
 
+
 # quickly open a new window
 bind N new-window
 
@@ -76,18 +77,18 @@ bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
 # Resize pane shortcuts
-bind -r H resize-pane -L 10
-bind -r J resize-pane -D 10
-bind -r K resize-pane -U 10
-bind -r L resize-pane -R 10
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
 
 # enable mouse support for switching panes/windows
-#setw -g mouse on
-# set-option -g -q mouse on
+setw -g mouse on
+set-option -g -q mouse on
 
 #bind-key -T root PPage if-shell -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
-bind-key -t vi-copy PPage page-up
-bind-key -t vi-copy NPage page-down
+#bind-key -t vi-copy PPage page-up
+#bind-key -t vi-copy NPage page-down
 
 #bind -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "select-pane -t =; send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
 #bind -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "select-pane -t =; send-keys -M" "select-pane -t =; send-keys -M"
@@ -107,11 +108,22 @@ unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+#bind -t vi-copy 'v' begin-selection
+#bind -t vi-copy 'y' copy-selection
 
 ##############################
 ### Color & Style Settings ###
 ##############################
 
-source ~/.dotfiles/tmux/theme.sh
+# source ~/.dotfiles/tmux/theme.sh
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tmp'
+set -g @plugin 'odedlaz/tmux-onedark-theme'
+
+##### widgets
+# set -g @onedark_widgets "#(date +%s)"
+set -g @onedark_date_format "%d.%m.%Y"
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

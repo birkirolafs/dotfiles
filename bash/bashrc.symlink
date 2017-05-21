@@ -8,6 +8,21 @@ fi
 export DOTFILES=$HOME/.dotfiles
 export BASH=$DOTFILES/bash
 
+command_exists() {
+	command -v "$1" > /dev/null 2>&1
+}
+
+# display how long all tasks over 10 seconds take
+export REPORTTIME=10
+
+[[ -e ~/.terminfo ]] && export TERMINFO_DIRS=~/.terminfo:/usr/share/terminfo
+
+# define the code directory
+# This is where my code exists and where I want the `c` autocomplete to work from exclusively
+if [[ -d ~/code ]]; then
+    export CODE_DIR=~/code
+fi
+
 # source all .bash files inside the bash/ directory
 # could be $BASH/**/*.bash
 for config in $BASH/*.bash ; do
@@ -19,6 +34,7 @@ if [[ -a ~/.localrc ]]; then
 fi
 
 export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 
 export PATH=/usr/local/bin:$PATH
 if [[ -d /usr/local/sbin ]]; then
@@ -27,23 +43,21 @@ fi
 
 export PATH=$DOTFILES/bin:$PATH
 
-#export TERM=xterm-256color-italic
+if [ -z "$TMUX" ]  && [[ $(uname -s) == "Darwin" ]]; then
+    export TERM=xterm-256color-italic
+else
+    export TERM=xterm-256color tmux
+fi
 
 export NVM_DIR="/home/birkir/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
-if [ "$BACKGROUND" = "dark" ]; then
-    export THEME="base16-atelier-cave"
-    BACKGROUND=""
-else
-    export THEME="base16-google-light"
-fi
-
-# Base16 Shell
-BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # Git prompt in bash shell
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\w$(__git_ps1 " (%s)")\$ '
+
+# Pyenv (Python Version Manager)
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
