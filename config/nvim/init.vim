@@ -25,17 +25,25 @@ let g:mapleader = ','
 set history=1000 " change history to 1000
 set textwidth=120
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" use the
+"  - WARNING: $NVIM_TUI_ENABLE_CURSOR_SHAPE is ignored in Nvim 0.2+
+"    - SUGGESTIONS:
+"      - Use the 'guicursor' option to configure cursor shape. :help |'guicursor'|
+"      - https://github.com/neovim/neovim/wiki/Following-HEAD#20170402
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" fix for resizing in Konsole (KDE)
+set guicursor=
 
 if &term =~ '256color'
-	" disable background color erase
-	set t_ut=
+    " disable background color erase
+    set t_ut=
 endif
 
 " enable 24 bit color support if supported
 if (has('nvim'))
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-	set termguicolors
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    set termguicolors
 elseif (has("termguicolors"))
     set termguicolors
 endif
@@ -50,9 +58,9 @@ set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 
 if (has('nvim'))
-	" show results of substition as they're happening
-	" but don't open a split
-	set inccommand=nosplit
+    " show results of substition as they're happening
+    " but don't open a split
+    set inccommand=nosplit
 endif
 
 
@@ -83,7 +91,7 @@ set laststatus=2 " show the status line all the time
 " file specific settings
 augroup configgroup
     autocmd!
-	autocmd FileType plugin indent on
+    autocmd FileType plugin indent on
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType make setlocal ts=9 sts=8 sw=8 noexpandtab
     autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
@@ -108,7 +116,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead .jshintrc set filetype=json
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
-	autocmd BufNewFile,BufRead *.tmux.conf set filetype=tmux
+    autocmd BufNewFile,BufRead *.tmux.conf set filetype=tmux
 
     autocmd FileType qf wincmd J
 
@@ -245,7 +253,7 @@ set invlist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
 set showbreak=↪
-nmap <leader>l :set list!<cr>
+" nmap <leader>l :set list!<cr>
 
 " Textmate style indentation
 vmap <leader>[ <gv
@@ -426,7 +434,7 @@ let g:NERDTreeQuitOnOpen=0
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
 " remove some files by extension
-let NERDTreeIgnore = ['\.js.map$']
+let NERDTreeIgnore = ['\.js.map$','__pycache__$[[dir]]', '.mypy_cache$[[dir]]']
 " Toggle NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
@@ -452,6 +460,23 @@ nmap <leader>mq :MarkedQuit<cr>
 nmap <leader>f :Limelight!!<cr>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+let g:neomake_python_enabled_makers = ['flake8', 'mypy']
+
+let g:neomake_python_flake8_maker = {
+    \ 'errorformat':
+        \ '%E%f:%l: error: %m,' .
+        \ '%W%f:%l: warning: %m,' .
+        \ '%I%f:%l: note: %m'
+\ }
+
+let g:neomake_python_mypy_maker = {
+    \ 'args': ['--check-untyped-defs', '--ignore-missing-imports'],
+    \ 'errorformat':
+        \ '%E%f:%l: error: %m,' .
+        \ '%W%f:%l: warning: %m,' .
+        \ '%I%f:%l: note: %m'
+\ }
 
 let g:neomake_javascript_jshint_maker = {
     \ 'args': ['--verbose'],
@@ -534,6 +559,18 @@ endif
 
 " vim:foldmethod=marker:foldlevel=0
 
+"
+" make test commands execute using dispatch.vim
+let test#strategy = 'neovim'
+let test#python#runner = 'pytest'
+
+" py.test configuration
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
 " interpreter paths for python
-let g:python_host_prog = '$HOME/.pyenv/versions/2.7/bin/python'
-let g:python3_host_prog = '$HOME/.pyenv/versions/3.4.6/bin/python'
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'

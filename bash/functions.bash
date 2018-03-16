@@ -98,3 +98,9 @@ function hl() {
 
     echo $src | highlight -O rtf --syntax $1 --font Inconsoloata --style $style --line-number --font-size 24 | pbcopy
 }
+
+# return the nth line of a text file with 
+# example: nth 1 /tmp/stuff.txt
+function nth() {
+    sed -e "$1q;d" "$2"
+}

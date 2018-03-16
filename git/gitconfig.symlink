@@ -18,6 +18,11 @@
     # show what I did today
     day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
+    # open pull request
+    #pr = "!sh -c 'git log $(git rev-parse --abbrev-ref HEAD) | grep \"pull request\" | head -n 1 |  '"
+    #pr = "!sh -c 'git log $(git rev-parse --abbrev-ref HEAD) | grep \"pull request\" | head -n 1"
+    #pr = "!sh -c 'git log $(git rev-parse --abbrev-ref HEAD) | grep \"pull request\" | head -n 1 | sed -r \'s|.*#([0-9]*).*|\1|g\''"
+
     # show number of commits per contributer, sorted
     count = shortlog -sn
 
@@ -25,6 +30,9 @@
     amend = commit -a --amend
 
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
+
+	which = "!sh -c 'git branch | grep -v $(git symbolic-ref --short HEAD) | grep -i $0'"
+	lucky = "!sh -c 'git checkout $(git which $0 | shuf | head -n 1)'"
 
     # rebase the current branch with changes from upstream remote
     update = !git fetch upstream && git rebase upstream/`git rev-parse --abbrev-ref HEAD`

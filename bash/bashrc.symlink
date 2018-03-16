@@ -46,16 +46,19 @@ export PATH=$DOTFILES/bin:$PATH
 if [ -z "$TMUX" ]  && [[ $(uname -s) == "Darwin" ]]; then
     export TERM=xterm-256color-italic
 else
-    export TERM=xterm-256color tmux
+    export TERM=screen-256color
 fi
 
-export NVM_DIR="/home/birkir/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
 
 # Git prompt in bash shell
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\w$(__git_ps1 " (%s)")\$ '
+
+export PATH=$PATH:$HOME/.local/bin
 
 # Pyenv (Python Version Manager)
 export PYENV_ROOT="$HOME/.pyenv"

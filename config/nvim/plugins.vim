@@ -37,6 +37,8 @@ Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'tpope/vim-unimpaired' " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-surround'
 
+Plug 'janko-m/vim-test' " for testing inside of vim
+
 " Problems
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 
@@ -44,6 +46,8 @@ Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 
 " language-specific plugins
+
+" PYTHON
 
 " MARKDOWN
 Plug 'junegunn/goyo.vim'

@@ -23,14 +23,14 @@ alias lld="ls -1 | grep ^d"
 alias rmf="rm -rf"
 
 # Helpers
-alias grep="grep --color=auto"
+alias grep="grep --color=auto --exclude=*.pyc --exclude-dir=.mypy_cache --exclude-dir=.git"
 alias df="df -h" # disk free, in Gigabytes, not bytes
 alias du="du -h -c" # calculate disk usage for a folder
 
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en1"
-alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+# IP addresses net-tools deprecation
+# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# alias localip="ipconfig getifaddr en1"
+# alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
@@ -43,3 +43,6 @@ alias fs="stat -f \"%z bytes\""
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias="$method"="lwp-request -m '$method'"
 done
+
+alias activate="source venv/bin/activate"
+alias titan="mysql -h titan.db.karaconnect.com -u trappa --database=titan -p"

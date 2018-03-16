@@ -1,0 +1,8 @@
+#!/bin/sh
+
+xrandr --output HDMI-1 --auto --right-of eDP-1
+if [[ $1 == *"txt"* ]]; then
+    mpv --screen=1 -fs -fs-screen=1 --audio-device=alsa/hdmi --playlist="$1"
+else
+    mpv --screen=1 -fs -fs-screen=1 --audio-device=alsa/hdmi "$1"
+fi

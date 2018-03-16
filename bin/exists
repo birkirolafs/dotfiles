@@ -1,0 +1,5 @@
+#/bin/sh
+
+exists() {
+	type "$1" &> /dev/null
+}
