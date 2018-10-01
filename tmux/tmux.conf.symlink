@@ -1,4 +1,4 @@
-#set -g default-command "login-shell"
+# set -g default-command "login-shell"
 
 # tmux display things in 256 colors
 set -g default-terminal "screen-256color"
@@ -47,6 +47,7 @@ setw -g pane-base-index 1
 
 set-option -g set-titles on
 set-option -g set-titles-string "#T - #W"
+set-option -g allow-rename off
 # set-window-option -g automatic-rename on
 
 ######################
@@ -101,7 +102,7 @@ bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection
 bind-key -T copy-mode-vi 'Space' send -X halfpage-down
 bind-key -T copy-mode-vi 'Bspace' send -X halfpage-up
-# bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xsel -i --clipboard"
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xsel -i --clipboard"
 
 # maximizing and restoring windows
 unbind Up
@@ -128,25 +129,36 @@ bind p paste-buffer
 # List of plugins
 set -g @plugin 'tmux-plugins/tmp'
 set -g @plugin 'odedlaz/tmux-onedark-theme'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# tmux-resurrect options
+set -g @resurrect-processes 'ssh mysql cmus'
+
+# tmux-onedark-theme options
 
 ##### widgets
 # set -g @onedark_widgets "#(sonos)"
+# set -g @onedark_widgets "#(cmus_status)"
 set -g @onedark_date_format "%d.%m.%Y"
+
+
 
 ##### pane colors
 ##### pane borders
-# onedark_black="#282c34"
-# onedark_blue="#61afef"
-# onedark_yellow="#e5c07b"
-# onedark_red="#e06c75"
-# onedark_white="#aab2bf"
-# onedark_green="#98c379"
-# onedark_visual_grey="#3e4452"
-# onedark_comment_grey="#5c6370"
-set pane-border-bg $onedark_visual_grey
-set pane-border-fg $onedark_white
-set pane-active-border-bg $onedark_visual_grey
-set pane-active-border-fg $onedark_green
+#onedark_black="#282c34"
+#onedark_blue="#61afef"
+#onedark_yellow="#e5c07b"
+#onedark_red="#e06c75"
+#onedark_white="#aab2bf"
+#onedark_green="#98c379"
+#onedark_visual_grey="#3e4452"
+#onedark_comment_grey="#5c6370"
+
+#set pane-border-bg $onedark_visual_grey
+#set pane-border-fg $onedark_white
+#set pane-active-border-bg $onedark_visual_grey
+#set pane-active-border-fg $onedark_green
 
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)

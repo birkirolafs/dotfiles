@@ -1,7 +1,7 @@
 # gitconfig
 [user]
 	name = Birkir Ólafsson
-	email = birkir@trappa.is
+	email = birkir@karaconnect.com
 [github]
 	user = birkirolafs
 [bitbucket]
@@ -11,6 +11,16 @@
 [alias]
 	# list all aliases
 	diff = diff --ignore-space-at-eol -b -w --ignore-blank-lines
+
+    hist = log --color --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --decorate
+    unstage = reset HEAD --
+    restore = checkout --
+    cn = commit --no-verify
+    co = checkout
+    praise = blame
+    visualise = !gitk
+    graph = log --color --graph --pretty=format:\"%h | %ad | %an | %s%d\" --date=short
+    st = status
 
 	# pretty log
 	l = log --graph --pretty=format:'%Cred%h%Creset %C(bold blue)%an%C(reset) - %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
@@ -44,17 +54,17 @@
     interactive = auto
     ui = auto
 [color "branch"]
-    current = green bold
-    local = green
-    remote = red bold
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
     meta = yellow bold
     frag = magenta bold
     old = red bold
     new = green bold
 [color "status"]
-    added = green bold
-    changed = yellow bold
+    added = green
+    changed = yellow
     untracked = red
 [color "sh"]
     branch = yellow

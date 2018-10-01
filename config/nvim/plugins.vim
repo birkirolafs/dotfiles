@@ -27,7 +27,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " file drawer
 " Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
-Plug 'ryanoasis/vim-devicons'
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
@@ -65,6 +64,9 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
 Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
+
+
+Plug 'ryanoasis/vim-devicons'
 
 
 call plug#end()

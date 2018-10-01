@@ -24,8 +24,12 @@ alias rmf="rm -rf"
 
 # Helpers
 alias grep="grep --color=auto --exclude=*.pyc --exclude-dir=.mypy_cache --exclude-dir=.git"
+alias t="t --task-dir ~/.t/tasks --list tasks"
 alias df="df -h" # disk free, in Gigabytes, not bytes
 alias du="du -h -c" # calculate disk usage for a folder
+
+# Git
+alias g="git status -sb"
 
 # IP addresses net-tools deprecation
 # alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -43,6 +47,3 @@ alias fs="stat -f \"%z bytes\""
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias="$method"="lwp-request -m '$method'"
 done
-
-alias activate="source venv/bin/activate"
-alias titan="mysql -h titan.db.karaconnect.com -u trappa --database=titan -p"

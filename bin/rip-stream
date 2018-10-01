@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z "$1" ]
+then
+    echo "Usage: rip-stream stream output"
+    exit 1
+fi
+
+echo "============================  Ripping Stream  =================================="
+
+if [ -z "$2" ]
+then
+    result=$(ffmpeg -loglevel error -i $1 -vcodec copy -acodec copy /av/stream.mp4)
+    echo "$1 ripped to /av/stream.mp4"
+else
+    result=$(ffmpeg -loglevel error -i $1 -vcodec copy -acodec copy $2.mp4)
+    echo "$1 ripped to $2.mp4"
+fi
+
+echo "============================       Done       =================================="

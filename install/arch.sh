@@ -23,7 +23,7 @@ else
 	sudo fc-cache -f
 fi
 
-#echo -e "\n\nInstalling onedark theme for gnome-terminal"
-#echo "=============================="
-#wget -q https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh > /tmp/one-dark.sh && (sh one-dark.sh)
-#echo "Please re-open terminal to load new profile changes"
+echo -e "\n\nInstalling onedark theme for gnome-terminal"
+echo "=============================="
+wget -q https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh > /tmp/one-dark.sh && (sh one-dark.sh)
+echo "Please re-open terminal to load new profile changes"
