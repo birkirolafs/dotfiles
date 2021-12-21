@@ -4,7 +4,7 @@ import soco
 
 def get_now_playing():
     for player in soco.discover():
-        if player.player_name.lower() in ['eldhús', 'elvis']:
+        if player.player_name.lower() in ['eldhús', 'elvis', 'connect']:
             track_info = player.get_current_track_info()
             print('~ ' + track_info['artist'] + ' - ' + track_info['title'] + ' ~')
             break

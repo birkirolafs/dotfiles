@@ -1,0 +1,25 @@
+{
+    "diagnostic.warningSign": "⚡",
+    "diagnostic.errorSign": "❌",
+    "diagnostic.hintSign": "💡",
+    "diagnostic.infoSign": "⚠️",
+    "diagnostic.enable": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "Markdown",
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "html"
+    ],
+    "html.autoClosingTags": true,
+    "javascript.suggestionActions.enabled": false,
+    "prettier.singleQuote": true,
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": false,
+    "prettier.disableSuccessMessage": true,
+    "suggest.removeDuplicateItems": true,
+    "css.validate": false,
+    "scss.validate": false,
+    "stylelintplus.autoFixOnSave": true
+}

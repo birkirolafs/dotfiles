@@ -62,8 +62,8 @@ bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
 bind N new-window
 
 # split window and fix path for tmux 1.9
-bind | split-window -h -c "#{pane_current_path}"
-bind - split-window -v -c "#{pane_current_path}"
+bind | split-window -h -c "#{pwd}"
+bind - split-window -v -c "#{pwd}"
 
 # synchronize all panes in a window
 bind y setw synchronize-panes
@@ -102,13 +102,19 @@ bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection
 bind-key -T copy-mode-vi 'Space' send -X halfpage-down
 bind-key -T copy-mode-vi 'Bspace' send -X halfpage-up
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xsel -i --clipboard"
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -sel clipboard"
 
 # maximizing and restoring windows
 unbind Up
 bind Up new-window -d -n fullscreen \; swap-pane -s fullscreen.1 \; select-window -t fullscreen
 unbind Down
 bind Down last-window \; swap-pane -s fullscreen.1 \; kill-window -t fullscreen
+
+# move the current window as the first one
+# borrowed at 14.05.2020 from https://superuser.com/questions/343572/how-do-i-reorder-tmux-windows
+bind-key -n C-S-Left swap-window -t -1\; select-window -t -1
+bind-key -n C-S-Right swap-window -t +1\; select-window -t +1
+
 
 # set vi mode for copy mode
 setw -g mode-keys vi
@@ -120,27 +126,34 @@ bind p paste-buffer
 #bind -t vi-copy 'v' begin-selection
 #bind -t vi-copy 'y' copy-selection
 
+bind Delete confirm-before kill-session
 ##############################
 ### Color & Style Settings ###
 ##############################
 
 # source ~/.dotfiles/tmux/theme.sh
 
+set -g focus-events on
+
 # List of plugins
 set -g @plugin 'tmux-plugins/tmp'
-set -g @plugin 'odedlaz/tmux-onedark-theme'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'lawabidingcactus/tmux-gruvbox-truecolor'
+# set -g @plugin 'Mpdreamz/tmux-cmus'
+# set -g @plugin 'odedlaz/tmux-onedark-theme'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # tmux-resurrect options
-set -g @resurrect-processes 'ssh mysql cmus'
+# set -g @resurrect-processes 'ssh mysql cmus'
 
 # tmux-onedark-theme options
 
 ##### widgets
 # set -g @onedark_widgets "#(sonos)"
 # set -g @onedark_widgets "#(cmus_status)"
-set -g @onedark_date_format "%d.%m.%Y"
+# set -g @onedark_widgets "#{zei}"
+# set -g @onedark_widgets "#{cmus_status}"
+# set -g @onedark_date_format "%d.%m.%Y"
 
 
 

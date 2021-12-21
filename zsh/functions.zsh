@@ -108,3 +108,15 @@ function hl() {
 function nth() {
     sed -e "$1q;d" "$2"
 }
+
+function mig_log() {
+    local environ=${1:-prod}
+	if [[ "$environ" = "prod" ]]
+	then
+		local log_group="/aws/codebuild/$environ-kara-api-ecs-migration"
+	else
+		local log_group="/aws/codebuild/$environ-kara-api-ecs-migrations"
+	fi
+    echo $log_group
+	awslogs get "$log_group" ALL --watch --timestamp --start="1d ago"
+}

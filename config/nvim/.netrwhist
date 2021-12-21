@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/birkir/.config/mpv'
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/birkir/code/kara-keycloak/startup-scripts'
+let g:netrw_dirhist_9='/home/birkir/.pyenv/shims'
+let g:netrw_dirhist_8='/home/birkir/code/api.karaconnect.com/api'
+let g:netrw_dirhist_7='/home/birkir/code/kara/app/src'
+let g:netrw_dirhist_6='/home/birkir/code/api.karaconnect.com/api/services'
+let g:netrw_dirhist_5='/home/birkir/code/go.karaconnect.com/src/containers/Signup'
+let g:netrw_dirhist_4='/home/birkir/spotifyd'
+let g:netrw_dirhist_3='/home/birkir/code/api.karaconnect.com/api/v1'
+let g:netrw_dirhist_2='/home/birkir/code/api.karaconnect.com/api/models'
+let g:netrw_dirhist_1='/home/birkir/code/api.karaconnect.com/api'

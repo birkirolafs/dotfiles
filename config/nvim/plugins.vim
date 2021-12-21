@@ -26,15 +26,24 @@ Plug 'junegunn/vim-easy-align'
 " utilities
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " file drawer
-" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Plug 'kien/ctrlp' " find files
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'vim-airline/vim-airline' " fancy statusline
-Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
+Plug 'itchyny/lightline.vim'
+
+" Tmux (Terminal multiplexor) compatability
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functuality
+
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'tpope/vim-unimpaired' " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-surround'
+
+Plug 'tommcdo/vim-fubitive' " Bitbucket addition to fugitive
 
 Plug 'janko-m/vim-test' " for testing inside of vim
 
@@ -46,27 +55,37 @@ Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 
 " language-specific plugins
 
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+" elm
+Plug 'elmcast/elm-vim'
+
 " PYTHON
+Plug 'michaeljsmith/vim-indent-object'
 
 " MARKDOWN
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
+Plug 'vimwiki/vimwiki'
 
 " HTML
 Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
 Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
 " JAVASCRIPT
+" Plug 'w0rp/ale', { 'for': ['javascript', 'jsx', 'elm'] } " ES6 and beyond syntax
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' } " node support
 Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+Plug 'mxw/vim-jsx', { 'for': ['jsx', 'tsx'] } " JSX support
+Plug 'leafgarland/typescript-vim', { 'for': 'tsx' } " JSX support for react
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'tsx' } " JSX support
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
 
 
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 
 
 call plug#end()

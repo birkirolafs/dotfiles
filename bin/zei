@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+TIMEULAR=https://api.timeular.com/api/v2
+TOK=$(curl ${TIMEULAR}/developer/sign-in -d '{"apiKey":"NjMzMzhfZGRkZDhjMzk4YzlmNDliMDlkOGM0MGMzNjE2YTQ4MWQ=","apiSecret":"ZTVkNWE1NDhmYjU2NDcyMjhjZDdkMjM4MDRhNTE4ZDE="}' -H "content-type: application/json" -s | jq -r .token)
+CURRENT=$(curl -s ${TIMEULAR}/tracking -H "Authorization: Bearer $TOK")
+echo $CURRENT

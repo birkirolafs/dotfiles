@@ -1,6 +1,6 @@
 loglevel silent=true
 loglevel=silent
-init.author.name=Birkir ������Ólafsson
+init.author.name=Birkir Ólafsson
 init.author.email=birkir@karaconnect.com
 init.licence=MIT
 init.version=0.0.1
